@@ -28,3 +28,4 @@ C:\Users\PC\Documents\Projets\csharp\Application Gestion Stock\StockManagement.U
 C:\Users\PC\Documents\Projets\csharp\Application Gestion Stock\StockManagement.UI\obj\Debug\net9.0-windows\StockManagement.UI.pdb
 C:\Users\PC\Documents\Projets\csharp\Application Gestion Stock\StockManagement.UI\obj\Debug\net9.0-windows\StockManagement.UI.genruntimeconfig.cache
 C:\Users\PC\Documents\Projets\csharp\Application Gestion Stock\StockManagement.UI\obj\Debug\net9.0-windows\ref\StockManagement.UI.dll
+C:\Users\PC\Documents\Projets\csharp\Application Gestion Stock\StockManagement.UI\obj\Debug\net9.0-windows\StockManagement.UI.sourcelink.json
