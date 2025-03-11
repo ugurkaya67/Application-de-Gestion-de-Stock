@@ -18,6 +18,8 @@ C:\Users\PC\Documents\Projets\csharp\Application Gestion Stock\StockManagement.U
 C:\Users\PC\Documents\Projets\csharp\Application Gestion Stock\StockManagement.UI\bin\Debug\net9.0-windows\runtimes\win-x64\native\krb5_64.dll
 C:\Users\PC\Documents\Projets\csharp\Application Gestion Stock\StockManagement.UI\bin\Debug\net9.0-windows\runtimes\win-x64\native\krbcc64.dll
 C:\Users\PC\Documents\Projets\csharp\Application Gestion Stock\StockManagement.UI\obj\Debug\net9.0-windows\StockManagement.UI.csproj.AssemblyReference.cache
+C:\Users\PC\Documents\Projets\csharp\Application Gestion Stock\StockManagement.UI\obj\Debug\net9.0-windows\StockManagement.UI.MainMenuForm.resources
+C:\Users\PC\Documents\Projets\csharp\Application Gestion Stock\StockManagement.UI\obj\Debug\net9.0-windows\StockManagement.UI.csproj.GenerateResource.cache
 C:\Users\PC\Documents\Projets\csharp\Application Gestion Stock\StockManagement.UI\obj\Debug\net9.0-windows\StockManagement.UI.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\PC\Documents\Projets\csharp\Application Gestion Stock\StockManagement.UI\obj\Debug\net9.0-windows\StockManagement.UI.AssemblyInfoInputs.cache
 C:\Users\PC\Documents\Projets\csharp\Application Gestion Stock\StockManagement.UI\obj\Debug\net9.0-windows\StockManagement.UI.AssemblyInfo.cs
