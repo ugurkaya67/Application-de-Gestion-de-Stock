@@ -14,9 +14,21 @@ namespace StockManagement.UI
             LoadProducts();
         }
 
+        private void btnTestConnection_Click(object sender, EventArgs e)
+        {
+            db.TestConnection();
+        }
+
         private void LoadProducts()
         {
-            dataGridViewProducts.DataSource = db.GetProducts();
+            try
+            {
+                dataGridViewProducts.DataSource = db.GetProducts();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur lors du chargement des produits : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

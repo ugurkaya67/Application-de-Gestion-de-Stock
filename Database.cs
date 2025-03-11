@@ -1,40 +1,53 @@
 using System;
 using System.Data;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using System.Configuration;
 
 namespace StockManagement.UI
 {
     public class Database
     {
-        private MySqlConnection connection;
+        private readonly string connectionString = "Server=localhost;Database=StockDB;User ID=root;Password=root;Port=3306;";
 
-        public Database()
+        public void TestConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
-            connection = new MySqlConnection(connectionString);
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    MessageBox.Show("Connexion réussie à la base de données !", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur de connexion : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public DataTable GetProducts()
         {
-            DataTable dataTable = new DataTable();
+            DataTable products = new DataTable();
             try
             {
-                connection.Open();
-                string query = "SELECT * FROM products";
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                adapter.Fill(dataTable);
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Products"; // Assurez-vous que la table `Products` existe bien
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                        {
+                            adapter.Fill(products);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erreur: " + ex.Message);
+                MessageBox.Show($"Erreur lors du chargement des produits : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                connection.Close();
-            }
-            return dataTable;
+            return products;
         }
     }
 }
