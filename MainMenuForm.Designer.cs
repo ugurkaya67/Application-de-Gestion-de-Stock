@@ -3,7 +3,7 @@
     partial class MainMenuForm
     {
         private System.ComponentModel.IContainer components = null;
-
+        private System.Windows.Forms.Button btnAddProduct;
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -39,10 +39,21 @@
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
 
             // 
+            // btnAddProduct
+            // 
+            this.btnAddProduct = new System.Windows.Forms.Button();
+            this.btnAddProduct.Location = new System.Drawing.Point(50, 130); // Position
+            this.btnAddProduct.Name = "btnAddProduct";
+            this.btnAddProduct.Size = new System.Drawing.Size(200, 40);
+            this.btnAddProduct.Text = "Ajouter Produit";
+            this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
+            
+            // 
             // MainMenuForm
             // 
             this.ClientSize = new System.Drawing.Size(300, 150);
             this.Controls.Add(this.btnManageProducts);
+            this.Controls.Add(this.btnAddProduct);
             this.Controls.Add(this.btnExit);
             this.Name = "MainMenuForm";
             this.Text = "Menu Principal";

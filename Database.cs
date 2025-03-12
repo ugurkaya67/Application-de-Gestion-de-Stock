@@ -24,7 +24,10 @@ namespace StockManagement.UI
                 MessageBox.Show($"Erreur de connexion : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        public MySqlConnection GetConnection()
+        {
+            return new MySqlConnection(connectionString);
+        }
         public DataTable GetProducts()
         {
             DataTable products = new DataTable();
@@ -48,6 +51,31 @@ namespace StockManagement.UI
                 MessageBox.Show($"Erreur lors du chargement des produits : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return products;
+        }
+        public void AddProduct(string name, decimal price, int quantity, string category)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "INSERT INTO Products (name, price, quantity, category) VALUES (@name, @price, @quantity, @category)";
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@name", name);
+                        cmd.Parameters.AddWithValue("@price", price);
+                        cmd.Parameters.AddWithValue("@quantity", quantity);
+                        cmd.Parameters.AddWithValue("@category", category);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Produit ajouté avec succès !", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur lors de l'ajout du produit : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

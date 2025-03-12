@@ -30,5 +30,11 @@ namespace StockManagement.UI
                 MessageBox.Show($"Erreur lors du chargement des produits : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void btnAddNewProduct_Click(object sender, EventArgs e)
+        {
+            AddProductForm addProductForm = new AddProductForm();
+            addProductForm.ShowDialog();
+            LoadProducts(); 
+        }
     }
 }
