@@ -4,6 +4,7 @@
     {
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.Button btnAddProduct;
+        private System.Windows.Forms.Button btnDeleteProduct;
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -17,7 +18,7 @@
         {
             this.btnManageProducts = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-
+            this.btnDeleteProduct = new System.Windows.Forms.Button();
             this.SuspendLayout();
 
             // 
@@ -48,12 +49,22 @@
             this.btnAddProduct.Text = "Ajouter Produit";
             this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
             
+            //
+            // btnDeleteProduct
+            this.btnDeleteProduct = new System.Windows.Forms.Button();
+            this.btnDeleteProduct.Location = new System.Drawing.Point(50, 180); // Position
+            this.btnDeleteProduct.Name = "btnDeleteProduct";
+            this.btnDeleteProduct.Size = new System.Drawing.Size(200, 40);
+            this.btnDeleteProduct.Text = "Supprimer Produit";
+            this.btnDeleteProduct.Click += new System.EventHandler(this.btnDeleteProduct_Click);
+
             // 
             // MainMenuForm
             // 
             this.ClientSize = new System.Drawing.Size(300, 150);
             this.Controls.Add(this.btnManageProducts);
             this.Controls.Add(this.btnAddProduct);
+            this.Controls.Add(this.btnDeleteProduct);            
             this.Controls.Add(this.btnExit);
             this.Name = "MainMenuForm";
             this.Text = "Menu Principal";

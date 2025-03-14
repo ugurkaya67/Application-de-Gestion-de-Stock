@@ -21,6 +21,12 @@ namespace StockManagement.UI
             addProductForm.ShowDialog();
         }
 
+        private void btnDeleteProduct_Click(object sender, EventArgs e)
+        {
+            var deleteProductForm = new DeleteProductForm(); // Formulaire pour supprimer un produit
+            deleteProductForm.Show();
+        }
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit(); // Ferme l'application

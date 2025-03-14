@@ -36,5 +36,11 @@ namespace StockManagement.UI
             addProductForm.ShowDialog();
             LoadProducts(); 
         }
+        private void btnDeleteProduct_Click(object sender, EventArgs e)
+        {
+            var deleteProductForm = new DeleteProductForm();
+            deleteProductForm.Show();
+        }
+
     }
 }

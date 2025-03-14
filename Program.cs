@@ -10,7 +10,7 @@ namespace StockManagement.UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainMenuForm()); // Assurez-vous que MainMenuForm est le bon nom de votre formulaire principal
+            Application.Run(new MainMenuForm()); 
         }
     }
 }
