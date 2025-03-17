@@ -41,7 +41,7 @@ namespace StockManagement.UI
                     connection.Open();
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@Nom", txtName.Text ?? string.Empty);
+                        cmd.Parameters.AddWithValue("@name", productName ?? string.Empty);
                         cmd.Parameters.AddWithValue("@Prix", productPrice);
                         cmd.Parameters.AddWithValue("@Quantite", productQuantity);
                         cmd.Parameters.AddWithValue("@Categorie", productCategory);

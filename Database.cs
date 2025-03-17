@@ -99,5 +99,32 @@ namespace StockManagement.UI
                 MessageBox.Show($"Erreur lors de la suppression du produit : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }            
         }
+
+        public DataTable SearchProducts(string searchTerm)
+        {
+            DataTable products = new DataTable();
+            try
+            {
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "SELECT * FROM Products WHERE Nom LIKE @search OR Categorie LIKE @search";
+                    using (var cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@search", "%" + searchTerm + "%");
+
+                        using (var adapter = new MySqlDataAdapter(cmd))
+                        {
+                            adapter.Fill(products);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur lors de la recherche de produits : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return products;
+        }
     }
 }
