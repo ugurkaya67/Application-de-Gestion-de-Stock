@@ -66,6 +66,25 @@ namespace StockManagement.UI
                 MessageBox.Show("Aucun produit correspondant trouvé.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+        private void dataGridViewProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Vérifie si l'utilisateur a cliqué sur la colonne "Modifier"
+            if (e.ColumnIndex == dataGridViewProducts.Columns["btnEdit"].Index && e.RowIndex >= 0)
+            {
+                // Récupère les informations du produit sélectionné
+                int productId = Convert.ToInt32(dataGridViewProducts.Rows[e.RowIndex].Cells["Id"].Value);
+                string productName = dataGridViewProducts.Rows[e.RowIndex].Cells["Nom"].Value.ToString();
+                decimal productPrice = Convert.ToDecimal(dataGridViewProducts.Rows[e.RowIndex].Cells["Prix"].Value);
+                int productQuantity = Convert.ToInt32(dataGridViewProducts.Rows[e.RowIndex].Cells["Quantite"].Value);
+                string productCategory = dataGridViewProducts.Rows[e.RowIndex].Cells["Categorie"].Value.ToString();
 
+                // Ouvre le formulaire d'édition avec les informations du produit
+                EditProductForm editForm = new EditProductForm(productId, productName, productPrice, productQuantity, productCategory);
+                editForm.ShowDialog();
+
+                // Recharge les produits après modification
+                LoadProducts();
+            }
+        }
     }
 }

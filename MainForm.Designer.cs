@@ -32,6 +32,18 @@
             this.dataGridViewProducts.Size = new System.Drawing.Size(600, 300);
             this.dataGridViewProducts.TabIndex = 0;
 
+            // Ajouter une colonne "Modifier"
+            DataGridViewButtonColumn btnEditColumn = new DataGridViewButtonColumn();
+            btnEditColumn.HeaderText = "Action";
+            btnEditColumn.Text = "Modifier";
+            btnEditColumn.Name = "btnEdit";
+            btnEditColumn.UseColumnTextForButtonValue = true;
+            this.dataGridViewProducts.Columns.Add(btnEditColumn);
+
+            // Ajouter l'événement pour gérer les clics sur les boutons "Modifier"
+            this.dataGridViewProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProducts_CellContentClick);
+
+
             // 
             // txtSearch (Zone de recherche)
             // 
