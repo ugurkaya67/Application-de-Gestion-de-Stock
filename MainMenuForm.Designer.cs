@@ -31,19 +31,10 @@
             this.btnManageProducts.Click += new System.EventHandler(this.btnManageProducts_Click);
 
             // 
-            // btnExit
-            // 
-            this.btnExit.Location = new System.Drawing.Point(50, 80);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(200, 40);
-            this.btnExit.Text = "Quitter";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-
-            // 
             // btnAddProduct
             // 
             this.btnAddProduct = new System.Windows.Forms.Button();
-            this.btnAddProduct.Location = new System.Drawing.Point(50, 130); // Position
+            this.btnAddProduct.Location = new System.Drawing.Point(50, 80); // Position
             this.btnAddProduct.Name = "btnAddProduct";
             this.btnAddProduct.Size = new System.Drawing.Size(200, 40);
             this.btnAddProduct.Text = "Ajouter Produit";
@@ -52,11 +43,20 @@
             //
             // btnDeleteProduct
             this.btnDeleteProduct = new System.Windows.Forms.Button();
-            this.btnDeleteProduct.Location = new System.Drawing.Point(50, 180); // Position
+            this.btnDeleteProduct.Location = new System.Drawing.Point(50, 130); // Position
             this.btnDeleteProduct.Name = "btnDeleteProduct";
             this.btnDeleteProduct.Size = new System.Drawing.Size(200, 40);
             this.btnDeleteProduct.Text = "Supprimer Produit";
             this.btnDeleteProduct.Click += new System.EventHandler(this.btnDeleteProduct_Click);
+
+            // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(50, 180);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(200, 40);
+            this.btnExit.Text = "Quitter";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
 
             // 
             // MainMenuForm
