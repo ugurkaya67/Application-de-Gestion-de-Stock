@@ -29,17 +29,27 @@
             this.dataGridViewProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewProducts.Location = new System.Drawing.Point(12, 50); // Position ajustée pour laisser de l'espace à la recherche
             this.dataGridViewProducts.Name = "dataGridViewProducts";
-            this.dataGridViewProducts.Size = new System.Drawing.Size(600, 300);
+            this.dataGridViewProducts.Size = new System.Drawing.Size(1000, 500);
             this.dataGridViewProducts.TabIndex = 0;
 
-            // Ajouter une colonne "Modifier"
-            DataGridViewButtonColumn btnEditColumn = new DataGridViewButtonColumn();
-            btnEditColumn.HeaderText = "Action";
-            btnEditColumn.Text = "Modifier";
-            btnEditColumn.Name = "btnEdit";
-            btnEditColumn.UseColumnTextForButtonValue = true;
-            this.dataGridViewProducts.Columns.Add(btnEditColumn);
+            // Ajouter les colonnes principales
+            //this.dataGridViewProducts.Columns.Add("Id", "ID");
+            //this.dataGridViewProducts.Columns.Add("Name", "Nom");
+            //this.dataGridViewProducts.Columns.Add("Price", "Prix");
+            //this.dataGridViewProducts.Columns.Add("Quantity", "Quantité");
+            //this.dataGridViewProducts.Columns.Add("Category", "Catégorie");
 
+
+            // Ajouter une colonne "Modifier"
+            if (dataGridViewProducts.Columns["btnEdit"] == null)
+            {
+                DataGridViewButtonColumn btnEditColumn = new DataGridViewButtonColumn();
+                btnEditColumn.HeaderText = "Action";
+                btnEditColumn.Text = "Modifier";
+                btnEditColumn.Name = "btnEdit";
+                btnEditColumn.UseColumnTextForButtonValue = true;
+                this.dataGridViewProducts.Columns.Add(btnEditColumn);
+            }
             // Ajouter l'événement pour gérer les clics sur les boutons "Modifier"
             this.dataGridViewProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProducts_CellContentClick);
 
@@ -84,7 +94,7 @@
             // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1200, 700);
             this.Controls.Add(this.dataGridViewProducts);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnSearch);

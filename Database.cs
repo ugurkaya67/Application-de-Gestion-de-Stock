@@ -133,11 +133,28 @@ namespace StockManagement.UI
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
                     conn.Open();
-                    string query = @"UPDATE Products 
-                                    SET Nom = @name, Prix = @price, Quantite = @quantity, Categorie = @category
-                                    WHERE ID = @id";
 
-                    using (var cmd = new MySqlCommand(query, conn))
+                    // Vérification si le produit existe avant de le mettre à jour
+                    string checkQuery = "SELECT COUNT(*) FROM Products WHERE Id = @id";
+                    using (var checkCmd = new MySqlCommand(checkQuery, conn))
+                    {
+                        checkCmd.Parameters.AddWithValue("@id", id);
+
+                        int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+                        if (count == 0)
+                        {
+                            MessageBox.Show("Aucun produit trouvé avec cet ID.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+
+                    // Mise à jour du produit
+                    string updateQuery = @"
+                        UPDATE Products 
+                        SET Nom = @name, Prix = @price, Quantite = @quantity, Categorie = @category, DateAjout = NOW()
+                        WHERE Id = @id";
+
+                    using (var cmd = new MySqlCommand(updateQuery, conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@name", name);
@@ -145,16 +162,8 @@ namespace StockManagement.UI
                         cmd.Parameters.AddWithValue("@quantity", quantity);
                         cmd.Parameters.AddWithValue("@category", category);
 
-                        int rowsAffected = cmd.ExecuteNonQuery();
-
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Produit mis à jour avec succès !", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Aucun produit trouvé avec cet ID.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Produit mis à jour avec succès !", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }

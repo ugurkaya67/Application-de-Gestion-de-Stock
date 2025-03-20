@@ -21,7 +21,7 @@ namespace StockManagement.UI
             string productName = txtName.Text.Trim();
             decimal productPrice = numericPrice.Value;
             int productQuantity = (int)numericQuantity.Value;
-            string productCategory = comboCategory.SelectedItem?.ToString();
+            string productCategory = comboCategory.SelectedItem?.ToString() ?? string.Empty;
 
             // Vérification des champs obligatoires
             if (string.IsNullOrEmpty(productName) || string.IsNullOrEmpty(productCategory))

@@ -15,6 +15,7 @@ namespace StockManagement.UI
 
             // Remplir les champs avec les infos actuelles
             productId = id;
+            Console.WriteLine($"ID du produit à modifier : {productId}");
             txtName.Text = name;
             numericPrice.Value = price;
             numericQuantity.Value = quantity;
@@ -27,7 +28,7 @@ namespace StockManagement.UI
             string newName = txtName.Text.Trim();
             decimal newPrice = numericPrice.Value;
             int newQuantity = (int)numericQuantity.Value;
-            string newCategory = comboCategory.SelectedItem?.ToString();
+            string newCategory = comboCategory.SelectedItem?.ToString() ?? string.Empty;
 
             // Vérification des champs vides
             if (string.IsNullOrEmpty(newName) || string.IsNullOrEmpty(newCategory))

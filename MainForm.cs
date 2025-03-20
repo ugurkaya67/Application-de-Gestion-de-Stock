@@ -20,12 +20,30 @@ namespace StockManagement.UI
         {
             db.TestConnection();
         }
-
         private void LoadProducts()
         {
             try
             {
-                dataGridViewProducts.DataSource = db.GetProducts();
+                var products = db.GetProducts();
+
+                // Vider les colonnes pour éviter les doublons
+                dataGridViewProducts.Columns.Clear();
+
+                // Ajouter les colonnes principales
+                dataGridViewProducts.DataSource = products;
+
+                // Ajouter la colonne Modifier si elle n'existe pas
+                if (!dataGridViewProducts.Columns.Contains("btnEdit"))
+                {
+                    DataGridViewButtonColumn btnEditColumn = new DataGridViewButtonColumn
+                    {
+                        HeaderText = "Action",
+                        Text = "Modifier",
+                        Name = "btnEdit",
+                        UseColumnTextForButtonValue = true
+                    };
+                    dataGridViewProducts.Columns.Add(btnEditColumn);
+                }
             }
             catch (Exception ex)
             {
@@ -68,23 +86,44 @@ namespace StockManagement.UI
         }
         private void dataGridViewProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Vérifie si l'utilisateur a cliqué sur la colonne "Modifier"
+            // Vérifie si la colonne cliquée est bien la colonne "Modifier"
             if (e.ColumnIndex == dataGridViewProducts.Columns["btnEdit"].Index && e.RowIndex >= 0)
             {
-                // Récupère les informations du produit sélectionné
-                int productId = Convert.ToInt32(dataGridViewProducts.Rows[e.RowIndex].Cells["Id"].Value);
-                string productName = dataGridViewProducts.Rows[e.RowIndex].Cells["Nom"].Value.ToString();
-                decimal productPrice = Convert.ToDecimal(dataGridViewProducts.Rows[e.RowIndex].Cells["Prix"].Value);
-                int productQuantity = Convert.ToInt32(dataGridViewProducts.Rows[e.RowIndex].Cells["Quantite"].Value);
-                string productCategory = dataGridViewProducts.Rows[e.RowIndex].Cells["Categorie"].Value.ToString();
+                try
+                {
+                    // Vérifier que toutes les données requises sont présentes
+                    if (dataGridViewProducts.Rows[e.RowIndex].Cells["Id"].Value == null)
+                    {
+                        MessageBox.Show("L'ID du produit est introuvable.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
-                // Ouvre le formulaire d'édition avec les informations du produit
-                EditProductForm editForm = new EditProductForm(productId, productName, productPrice, productQuantity, productCategory);
-                editForm.ShowDialog();
+                    int productId = Convert.ToInt32(dataGridViewProducts.Rows[e.RowIndex].Cells["Id"].Value);
+                    string productName = dataGridViewProducts.Rows[e.RowIndex].Cells["Nom"].Value?.ToString() ?? string.Empty;
+                    decimal productPrice = Convert.ToDecimal(dataGridViewProducts.Rows[e.RowIndex].Cells["Prix"].Value ?? 0);
+                    int productQuantity = Convert.ToInt32(dataGridViewProducts.Rows[e.RowIndex].Cells["Quantite"].Value ?? 0);
+                    string productCategory = dataGridViewProducts.Rows[e.RowIndex].Cells["Categorie"].Value?.ToString() ?? string.Empty;
 
-                // Recharge les produits après modification
-                LoadProducts();
+                    // Vérifier si les données sont valides avant de poursuivre
+                    if (string.IsNullOrEmpty(productName) || string.IsNullOrEmpty(productCategory))
+                    {
+                        MessageBox.Show("Données invalides pour ce produit.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Ouvre le formulaire de modification
+                    var editForm = new EditProductForm(productId, productName, productPrice, productQuantity, productCategory);
+                    editForm.ShowDialog();
+
+                    // Recharge les produits après la mise à jour
+                    LoadProducts();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erreur lors de la gestion du clic : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+
     }
 }
